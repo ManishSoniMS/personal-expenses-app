@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
+class AdaptiveFlatButton extends StatelessWidget {
+  final String text;
+  final handler;
+
+  AdaptiveFlatButton(this.text, this.handler);
+
+  @override
+  Widget build(BuildContext context) {
+    return Platform.isIOS
+        ? CupertinoButton(
+      child: Text(
+        text,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Theme.of(context).primaryColor,
+        ),
+      ),
+      onPressed: handler,
+    )
+    // ignore: deprecated_member_use
+        : FlatButton(
+      onPressed: handler,
+      child: Text(
+        text,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Theme.of(context).primaryColor,
+        ),
+      ),
+    );
+  }
+}
